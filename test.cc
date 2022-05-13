@@ -14,6 +14,8 @@ using namespace cpp_data_structures;
 
 int main() {
     // Array class tests
+    std::cout << "-----Array class tests-----" << std::endl;
+
     int numbers[5]{1, 2, 3, 4, 5};
     Array<int, 5> intArr(numbers);
 
@@ -35,5 +37,18 @@ int main() {
     std::cout << "Element " << index << " is " 
               << strArr.get(index) << std::endl;
 
+    std::cout << std::endl << std::endl;
+
+    // LinkedList class tests
+    std::cout << "-----LinkedList class tests-----" << std::endl;
+
+    LinkedList<int> intList(numbers, 5);
+
+    std::cout << intList << std::endl;
+
+    std::cout << std::endl << std::endl;
+
+
     return 0;
+
 }
