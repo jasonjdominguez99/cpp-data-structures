@@ -40,14 +40,14 @@ namespace cpp_data_structures {
     {
     private:
         T key;
-        Node* next;
+        Node<T>* next;
 
     public:
-        Node(T value, Node* successor): key{value}, next{successor} {}
+        Node(T value, Node<T>* successor): key{value}, next{successor} {}
 
         T get() { return key; }
-        Node* get_next() { return next; }
-        void set_next(Node* new_next_node) { next = new_next_node; }
+        Node<T>* get_next() { return next; }
+        void set_next(Node<T>* new_next_node) { next = new_next_node; }
 
     };
 

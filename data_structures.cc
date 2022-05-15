@@ -91,7 +91,7 @@ namespace cpp_data_structures {
 
     template<class T>
     void LinkedList<T>::add_start(T val) {
-        head = Node<T>(val, &head);
+        head = new Node<T>(val, head);
     }
 
     template<class T>
@@ -108,13 +108,13 @@ namespace cpp_data_structures {
 
     template<class T>
     T LinkedList<T>::get_current() {
-        return *current;
+        return current->get();
     }
 
     template<class T>
     bool LinkedList<T>::iter_next() {
-        if (this->current.get_next() != nullptr) {
-            this->current = current.get_next();
+        if (this->current->get_next() != nullptr) {
+            this->current = current->get_next();
             return true;
         } else {
             return false;
