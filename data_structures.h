@@ -14,7 +14,6 @@
 #define DATA_STRUCTURES_H_
 
 namespace cpp_data_structures {
-
     // Array class definition
     template <typename T, int size>
     class Array
@@ -28,11 +27,6 @@ namespace cpp_data_structures {
         T operator[](int i) const { return elements[i]; }
         T& operator[](int i) { return elements[i]; }
         std::pair<bool, int> find_first(T val) const;
-
-        template<class U, int s> friend std::ostream& operator<<(
-            std::ostream& os,
-            const Array<U, s>& arr
-        );
 
         template<class U, int s> friend std::ostream& operator<<(
             std::ostream& os,
@@ -89,6 +83,10 @@ namespace cpp_data_structures {
         );
 
     };
+
+
+    // Stack class definition
+    
 
 }
 
