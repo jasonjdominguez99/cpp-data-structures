@@ -7,6 +7,7 @@
 // class definitions
 
 #include <iostream>
+#include <utility>
 #include <memory>
 
 #ifndef DATA_STRUCTURES_H_
@@ -26,10 +27,7 @@ namespace cpp_data_structures {
 
         T operator[](int i) const { return elements[i]; }
         T& operator[](int i) { return elements[i]; }
-        // int find(T val) const;
-
-        // T get(int index);
-        // void set(T value, int index);
+        std::pair<bool, int> find_first(T val) const;
 
         template<class U, int s> friend std::ostream& operator<<(
             std::ostream& os,
@@ -76,8 +74,6 @@ namespace cpp_data_structures {
     public:
         LinkedList(T init_val);
         LinkedList(T init_vals[], int size);
-
-        // ~LinkedList();
 
         void add_start(T val);
         void add_end(T val);

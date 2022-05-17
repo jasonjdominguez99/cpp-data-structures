@@ -7,6 +7,7 @@
 // implementations
 
 #include <iostream>
+#include <utility>
 #include <string>
 #include "data_structures.cc"
 
@@ -42,8 +43,19 @@ int main() {
     std::cout << "Element " << index << " is " 
               << strArr[index] << std::endl;
 
-    std::cout << std::endl << std::endl;
+    // Testing searching in std::string array
+    std::cout << strArr << std::endl;
+    std::string string_to_find{"new"};
+    std::pair<bool, int> search_result{strArr.find_first(string_to_find)};
+    std::cout << string_to_find << " is ";
+    if (search_result.first == true) {
+        std::cout << "at index " << search_result.second << std::endl;
+    } else {
+        std::cout << "not in the array!" << std::endl;
+    }
 
+    std::cout << std::endl << std::endl;
+    
 
     //-----LinkedList class tests-----
     std::cout << "-----LinkedList class tests-----" << std::endl;
