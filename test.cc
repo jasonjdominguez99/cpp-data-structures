@@ -16,22 +16,27 @@ int main() {
     //-----Array class tests-----
     std::cout << "-----Array class tests-----" << std::endl;
 
+    // Testing int array constructor
     int numbers[5]{1, 2, 3, 4, 5};
     Array<int, 5> intArr(numbers);
     std::cout << intArr << std::endl;
 
+    // Testing int array accessor
     int index{1};
     std::cout << "Element " << index << " is " 
               << intArr[index] << std::endl;
 
+    // Testing std::string array constructor
     std::string words[3]{"hi", "jason", "cool"};
     Array<std::string, 3> strArr(words);
     std::cout << strArr << std::endl;
 
+    // Testing std::string array accessor
     index = 2;
     std::cout << "Element " << index << " is " 
               << strArr[index] << std::endl;
     
+    // Testing std::string array element reassignment
     strArr[index] = "new";
     std::cout << strArr << std::endl;
     std::cout << "Element " << index << " is " 
@@ -39,26 +44,33 @@ int main() {
 
     std::cout << std::endl << std::endl;
 
+
     //-----LinkedList class tests-----
     std::cout << "-----LinkedList class tests-----" << std::endl;
 
+    // Testing int linked list constructor
     LinkedList<int> intList(numbers, 5);
     std::cout << intList << std::endl;
 
+    // Testing int linked list iterator
     intList.iter_next();
     std::cout << "Next number is " << intList.get_current() << std::endl;
 
+    // Testing int linked list iterator reset method
     intList.reset();
     std::cout << "Starting number is " << intList.get_current() << std::endl;
 
+    // Testing std::string linked list constructor
     LinkedList<std::string> strList(words, 3);
     std::cout << strList << std::endl;
 
+    // Testing adding to the start of a linked list
     std::string new_start_word{"start"};
     std::cout << "Adding " << new_start_word << " to the start of the list:" << std::endl;
     strList.add_start(new_start_word);
     std::cout << strList << std::endl;
 
+    // Testing adding to the end of a linked list
     std::string new_end_word{"end"};
     std::cout << "Adding " << new_end_word << " to the end of the list:" << std::endl;
     strList.add_end(new_end_word);
