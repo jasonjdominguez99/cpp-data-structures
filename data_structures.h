@@ -14,9 +14,9 @@
 #define DATA_STRUCTURES_H_
 
 namespace cpp_data_structures {
-    
+
     // Array class definition
-    template <typename T, int size>
+    template <typename T, unsigned int size>
     class Array
     {
     private:
@@ -87,7 +87,29 @@ namespace cpp_data_structures {
 
 
     // Stack class definition
-    
+    template<typename T, unsigned int size>
+    class Stack
+    {
+    private:
+        std::unique_ptr<T> elements[size];
+
+    public:
+        Stack();
+
+        void push(T val);
+        T pop();
+
+        T peek() const;
+        unsigned int size_filled() const;
+        bool is_empty() const;
+        bool is_full() const;
+
+        template<class U, unsigned int s> friend std::ostream& operator<<(
+            std::ostream& os,
+            const Stack<U>& stack
+        );
+
+    }
 
 }
 
