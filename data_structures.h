@@ -7,6 +7,7 @@
 // class definitions
 
 #include <iostream>
+#include <memory>
 
 #ifndef DATA_STRUCTURES_H_
 #define DATA_STRUCTURES_H_
@@ -40,14 +41,19 @@ namespace cpp_data_structures {
     {
     private:
         T key;
-        Node<T>* next;
+        std::shared_ptr<Node<T>> next;
 
     public:
-        Node(T value, Node<T>* successor): key{value}, next{successor} {}
+        Node(T value, std::shared_ptr<Node<T>> successor): key{value}, next{successor} {}
 
         T get() { return key; }
-        Node<T>* get_next() { return next; }
-        void set_next(Node<T>* new_next_node) { next = new_next_node; }
+        std::shared_ptr<Node<T>> get_next() { return next; }
+        void set_next(std::shared_ptr<Node<T>> new_next_node) { next = new_next_node; }
+
+        template<class U> friend std::ostream& operator<<(
+            std::ostream& os,
+            const Node<U>& node
+        );
 
     };
 
@@ -55,18 +61,20 @@ namespace cpp_data_structures {
     class LinkedList
     {
     private:
-        Node<T>* head;
-        Node<T>* current;
+        std::shared_ptr<Node<T>> head;
+        std::shared_ptr<Node<T>> current;
 
     public:
         LinkedList(T init_val);
         LinkedList(T init_vals[], int size);
 
-        ~LinkedList();
+        // ~LinkedList();
 
         void add_start(T val);
         void add_end(T val);
+        void set_current(std::shared_ptr<Node<T>> node);
         T get_current();
+        std::shared_ptr<Node<T>> get_current_node();
         bool iter_next();
         void reset();
 

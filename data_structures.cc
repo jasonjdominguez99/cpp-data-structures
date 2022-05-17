@@ -7,6 +7,7 @@
 // class implementations
 
 #include <iostream>
+#include <memory>
 #include <exception>
 #include "data_structures.h"
 
@@ -58,18 +59,24 @@ namespace cpp_data_structures {
 
 
     // LinkedList class method implementations
+    template <class U>
+    std::ostream& operator<<(std::ostream& os, const Node<U>& node) {
+        os << node.key;
+        return os;
+    }
+
     template<class T>
     LinkedList<T>::LinkedList(T init_val) {
-        head, current = &Node<T>(init_val, nullptr);
+        head, current = std::shared_ptr<Node<T>>(init_val, nullptr);
     }
 
     template<class T>
     LinkedList<T>::LinkedList(T init_vals[], int size) {
-        head = new Node<T>(init_vals[0], nullptr);
+        head = std::make_shared<Node<T>>(init_vals[0], nullptr);
 
-        Node<T>* current_node = head;
+        std::shared_ptr<Node<T>> current_node = head;
         for (int i=1; i < size; i++) {
-            Node<T>* next_node = new Node<T>(init_vals[i], nullptr);
+            std::shared_ptr<Node<T>> next_node{new Node<T>(init_vals[i], nullptr)};
             current_node->set_next(next_node);
             current_node = next_node;
         }
@@ -77,38 +84,43 @@ namespace cpp_data_structures {
         current = head;
     }
 
-    template<class T>
-    LinkedList<T>::~LinkedList() {
-        this->reset();
-        while (current->get_next() != nullptr) {
-            Node<T>* prev_node = current;
-            current = current->get_next();
-            delete prev_node;
-        }
-
-        delete current;
-    }
+    // template<class T>
+    // LinkedList<T>::~LinkedList() {
+    //     this->reset();
+    //     while (current->get_next() != nullptr) {
+    //         std::shared_ptr<Node<T>> prev_node = current;
+    //         current = current->get_next();
+    //     }
+    // }
 
     template<class T>
     void LinkedList<T>::add_start(T val) {
-        head = new Node<T>(val, head);
+        head = std::make_shared<Node<T>>(val, head);
     }
 
     template<class T>
     void LinkedList<T>::add_end(T val) {
-        Node<T> new_node = Node<T>(val, nullptr);
-
-        Node<T>* current_node = current;
+        std::shared_ptr<Node<T>> current_node = current;
         while (current_node->get_next() != nullptr) {
             current_node = current_node->get_next();
         }
 
-        current_node->set_next(&new_node);
+        current_node->set_next(std::make_shared<Node<T>>(val, nullptr));
+    }
+
+    template<class T>
+    void LinkedList<T>::set_current(std::shared_ptr<Node<T>> node) {
+        current = node;
     }
 
     template<class T>
     T LinkedList<T>::get_current() {
         return current->get();
+    }
+
+    template<class T>
+    std::shared_ptr<Node<T>> LinkedList<T>::get_current_node() {
+        return current;
     }
 
     template<class T>
@@ -127,16 +139,19 @@ namespace cpp_data_structures {
     }
 
     template <class U>
-    std::ostream& operator<<(std::ostream& os, const LinkedList<U>& list) {
+    std::ostream& operator<<(std::ostream& os, LinkedList<U>& list) {
         os << "[ ";
 
-        Node<U>* current_node = list.head;
-        while (current_node->get_next() != nullptr) {
-            os << current_node->get() << " ";
-            current_node = current_node->get_next();
+        std::shared_ptr<Node<U>> current_node{list.get_current_node()};
+        list.reset();
+        while (list.get_current_node()->get_next() != nullptr) {
+            os << list.get_current_node()->get() << " "; // something about this line cause last value in list to be messed up
+            list.iter_next();
         }
 
-        os << current_node->get() << " ]";
+        os << list.get_current_node()->get() << "]" << std::endl;
+
+        list.set_current(current_node);
 
         return os;
     }
