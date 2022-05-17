@@ -14,6 +14,7 @@
 #define DATA_STRUCTURES_H_
 
 namespace cpp_data_structures {
+    
     // Array class definition
     template <typename T, int size>
     class Array

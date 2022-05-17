@@ -12,7 +12,7 @@
 #include "data_structures.h"
 
 namespace cpp_data_structures {
-
+    
     // Array class method implementations
     template <class T, int size>
     Array<T, size>::Array(T array_elements[]) {
