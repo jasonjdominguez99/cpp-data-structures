@@ -24,8 +24,17 @@ namespace cpp_data_structures {
     public:
         Array(T array_elements[]);
 
-        T get(int index);
-        void set(T value, int index);
+        T operator[](int i) const { return elements[i]; }
+        T& operator[](int i) { return elements[i]; }
+        // int find(T val) const;
+
+        // T get(int index);
+        // void set(T value, int index);
+
+        template<class U, int s> friend std::ostream& operator<<(
+            std::ostream& os,
+            const Array<U, s>& arr
+        );
 
         template<class U, int s> friend std::ostream& operator<<(
             std::ostream& os,

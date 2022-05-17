@@ -13,7 +13,7 @@
 using namespace cpp_data_structures;
 
 int main() {
-    // Array class tests
+    //-----Array class tests-----
     std::cout << "-----Array class tests-----" << std::endl;
 
     int numbers[5]{1, 2, 3, 4, 5};
@@ -21,8 +21,8 @@ int main() {
     std::cout << intArr << std::endl;
 
     int index{1};
-    std::cout << "Element " << index << " = " 
-              << intArr.get(index) << std::endl;
+    std::cout << "Element " << index << " is " 
+              << intArr[index] << std::endl;
 
     std::string words[3]{"hi", "jason", "cool"};
     Array<std::string, 3> strArr(words);
@@ -30,16 +30,16 @@ int main() {
 
     index = 2;
     std::cout << "Element " << index << " is " 
-              << strArr.get(index) << std::endl;
+              << strArr[index] << std::endl;
     
-    strArr.set("new", index);
+    strArr[index] = "new";
     std::cout << strArr << std::endl;
     std::cout << "Element " << index << " is " 
-              << strArr.get(index) << std::endl;
+              << strArr[index] << std::endl;
 
     std::cout << std::endl << std::endl;
 
-    // LinkedList class tests
+    //-----LinkedList class tests-----
     std::cout << "-----LinkedList class tests-----" << std::endl;
 
     LinkedList<int> intList(numbers, 5);
