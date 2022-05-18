@@ -215,4 +215,13 @@ namespace cpp_data_structures {
         return os;
     }
 
+
+    // Queue class method implementations
+    template<class T, unsigned int size>
+    Queue<T, size>::Queue() {
+        for (int i=0; i < size; i++) {
+            elements[i] = std::unique_ptr<T>{nullptr};
+        }
+    }
+
 }
