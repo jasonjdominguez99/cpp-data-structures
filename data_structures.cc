@@ -14,7 +14,7 @@
 namespace cpp_data_structures {
 
     // Array class method implementations
-    template <class T, int size>
+    template<class T, unsigned int size>
     Array<T, size>::Array(T array_elements[]) {
         // this is vulnerbable to segmentation faults
         // if array_elements is differnt size from
@@ -24,7 +24,7 @@ namespace cpp_data_structures {
         }
     }
 
-    template <class T, int size>
+    template<class T, unsigned int size>
     std::pair<bool, int> Array<T, size>::find_first(T val) const {
         for (int i=0; i < size; i++) {
             if (elements[i] == val) {
@@ -35,7 +35,7 @@ namespace cpp_data_structures {
         return std::make_pair<bool, int>(false, 0);
     }
 
-    template <class U, int s>
+    template <class U, unsigned int s>
     std::ostream& operator<<(std::ostream& os, const Array<U, s>& arr) {
         os << "[ ";
         for (int i=0; i < s; i++) {
@@ -129,7 +129,7 @@ namespace cpp_data_structures {
             list.iter_next();
         }
 
-        os << list.get_current_node()->get() << "]" << std::endl;
+        os << list.get_current_node()->get() << "]";
 
         list.set_current(current_node);
 
@@ -138,64 +138,62 @@ namespace cpp_data_structures {
 
 
     // Stack class method implementations
-    template<class T, int size>
+    template<class T, unsigned int size>
     Stack<T, size>::Stack() {
         for (int i=0; i < size; i++) {
-            elements[i] = std::make_unique(nullptr);
+            elements[i] = std::unique_ptr<T>{nullptr};
         }
     }
 
-    template<class T, int size>
+    template<class T, unsigned int size>
     bool Stack<T, size>::push(T val) {
         if (this->is_full()) { return false; }
 
-        unsigned int top_of_stack{this->size_filled() - 1};
-        elements[top_of_stack] = std::make_unique(val);
+        unsigned int top_of_stack{this->num_filled()};
+        elements[top_of_stack] = std::make_unique<T>(val);
 
         return true;
     }
 
-    template<class T, int size>
+    template<class T, unsigned int size>
     T Stack<T, size>::pop() {
         std::pair<T, unsigned int> top_of_stack{this->peek()};
-        elements[top_of_stack.second] = std::make_unqiue(nullptr);
+        elements[top_of_stack.second] = std::unique_ptr<T>{nullptr};
 
-        return val_to_remove;
+        return top_of_stack.first;
     }
 
-    template<class T, int size>
+    template<class T, unsigned int size>
     std::pair<T, unsigned int> Stack<T, size>::peek() const {
         if (this->is_empty()) {
             throw std::out_of_range(
                 "Attempted to access an empty stack"
             );
         }
-        unsigned int top_of_stack{this->size_filled() - 1};
+        unsigned int top_of_stack{this->num_filled() - 1};
 
-        return std::make_pair<T, unsigned int>(
+        return std::pair<T, unsigned int>(
             *elements[top_of_stack],
             top_of_stack
         );
     }
 
-    template<class T, int size>
-    unsigned int Stack<T, size>::size_filled() const {
-        if (this->is_empty()) { return 0; }
-        if (this->is_full()) { return size; }
-
-        for (int i=1; i < size - 1; i++) {
+    template<class T, unsigned int size>
+    unsigned int Stack<T, size>::num_filled() const {
+        for (int i=0; i < size; i++) {
             if (elements[i] == nullptr) {
-                return i + 1;
+                return i;
             }
         }
+        return size;
     }
 
-    template<class T, int size>
+    template<class T, unsigned int size>
     bool Stack<T, size>::is_empty() const {
         return elements[0] == nullptr;
     }
 
-    template<class T, int size>
+    template<class T, unsigned int size>
     bool Stack<T, size>::is_full() const {
         return elements[size - 1] != nullptr;
     }
@@ -204,15 +202,15 @@ namespace cpp_data_structures {
     std::ostream& operator<<(std::ostream& os, const Stack<U, s>& stack) {
         os << "[ ";
 
-        for (int i=0; i < size; i++) {
+        for (int i=0; i < s; i++) {
             if (stack.elements[i] != nullptr) {
-                os << stack.elements << " ";
+                os << *stack.elements[i] << " ";
             } else {
                 os << "- ";
             }
         }
 
-        os << "]" << std::endl;
+        os << "]";
 
         return os;
     }

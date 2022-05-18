@@ -29,7 +29,7 @@ namespace cpp_data_structures {
         T& operator[](int i) { return elements[i]; }
         std::pair<bool, int> find_first(T val) const;
 
-        template<class U, int s> friend std::ostream& operator<<(
+        template<class U, unsigned int s> friend std::ostream& operator<<(
             std::ostream& os,
             const Array<U, s>& arr
         );
@@ -96,20 +96,20 @@ namespace cpp_data_structures {
     public:
         Stack();
 
-        void push(T val);
+        bool push(T val);
         T pop();
 
-        T peek() const;
-        unsigned int size_filled() const;
+        std::pair<T, unsigned int> peek() const;
+        unsigned int num_filled() const;
         bool is_empty() const;
         bool is_full() const;
 
         template<class U, unsigned int s> friend std::ostream& operator<<(
             std::ostream& os,
-            const Stack<U>& stack
+            const Stack<U, s>& stack
         );
 
-    }
+    };
 
 }
 
