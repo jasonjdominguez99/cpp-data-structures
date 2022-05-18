@@ -227,13 +227,19 @@ namespace cpp_data_structures {
 
     // Queue class method implementations
     template<class T, unsigned int size>
-    std::pair<bool, unsigned int> Queue<T, size>::add(T val) {
-        
+    void Queue<T, size>::move_up() {
+        for (int i=0; i < size - 1; i++) {
+            elements[i] = std::move(elements[i + 1]);
+        }
     }
 
     template<class T, unsigned int size>
     T Queue<T, size>::remove() {
-        
+        T removed_element = *elements[0];
+        elements[0] = std::make_unique(nullptr);
+        this->move_up();
+
+        return removed_element;
     }
 
 
