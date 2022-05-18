@@ -92,55 +92,62 @@ int main() {
     // std::cout << std::endl << std::endl;
     // //---------------------------------
 
-    //-----Stack class tests-----
-    std::cout << "-----Stack class tests-----" << std::endl;
+    // //-----Stack class tests-----
+    // std::cout << "-----Stack class tests-----" << std::endl;
 
-    // Testing int stack constructor
-    const unsigned int stack_size{5};
-    Stack<int, stack_size> intStack{};
-    std::cout << intStack << std::endl;
+    // // Testing int stack constructor
+    // const unsigned int stack_size{5};
+    // Stack<int, stack_size> intStack{};
+    // std::cout << intStack << std::endl;
 
-    // Testing is_empty method
-    std::string is_empty{};
-    if (intStack.is_empty()) {
-        is_empty = "is empty";
-    } else {
-        is_empty = "is not empty";
-    }
-    std::cout << "This stack " << is_empty << std::endl;
+    // // Testing is_empty method
+    // std::string is_empty{};
+    // if (intStack.is_empty()) {
+    //     is_empty = "is empty";
+    // } else {
+    //     is_empty = "is not empty";
+    // }
+    // std::cout << "This stack " << is_empty << std::endl;
 
-    // Testing adding to the stack
-    int num_to_add{5};
-    std::cout << "Adding " << num_to_add << " to"
-              << std::endl << intStack << std::endl
-              << "gives" << std::endl;
-    intStack.push(num_to_add);
-    std::cout << intStack << std::endl;
+    // // Testing adding to the stack
+    // int num_to_add{5};
+    // std::cout << "Adding " << num_to_add << " to"
+    //           << std::endl << intStack << std::endl
+    //           << "gives" << std::endl;
+    // intStack.push(num_to_add);
+    // std::cout << intStack << std::endl;
     
-    // Testing is_full method
-    for (int i=1; i < stack_size; i++) {
-        intStack.push(2*i);
-    }
-    std::cout << intStack << std::endl;
-    std::string is_full{};
-    if (intStack.is_full()) {
-        is_full = "is full";
-    } else {
-        is_full = "is not full";
-    }
-    std::cout << "This stack " << is_full << std::endl;
+    // // Testing is_full method
+    // for (int i=1; i < stack_size; i++) {
+    //     intStack.push(2*i);
+    // }
+    // std::cout << intStack << std::endl;
+    // std::string is_full{};
+    // if (intStack.is_full()) {
+    //     is_full = "is full";
+    // } else {
+    //     is_full = "is not full";
+    // }
+    // std::cout << "This stack " << is_full << std::endl;
 
-    // Testing peek method
-    std::cout << "The value at the top of the stack is "
-              << intStack.peek().first << std::endl;
+    // // Testing peek method
+    // std::cout << "The value at the top of the stack is "
+    //           << intStack.peek().first << std::endl;
 
-    // Testing removing from the stack
-    std::cout << "Removing " << intStack.pop() << " and " << intStack.pop()
-              << " from the top leaves us with " << std::endl
-              << intStack << std::endl;
+    // // Testing removing from the stack
+    // std::cout << "Removing " << intStack.pop() << " and " << intStack.pop()
+    //           << " from the top leaves us with " << std::endl
+    //           << intStack << std::endl;
 
-    std::cout << std::endl << std::endl;
+    // std::cout << std::endl << std::endl;
+    // //---------------------------------
+
+    //--------Queue class tests--------
+
+    
+
     //---------------------------------
+
 
     return 0;
 
