@@ -112,14 +112,14 @@ namespace cpp_data_structures {
             const AbstractStaticArray<U, s>& arr
         );
 
-    }
+    };
 
     // Stack class definition
     template<typename T, unsigned int size>
-    class Stack : public AbstractStaticArray
+    class Stack : public AbstractStaticArray<T, size>
     {
     public:
-        Stack() : AbstractStaticArray() {}
+        Stack() : AbstractStaticArray<T, size>() {}
         virtual ~Stack() {}
 
         T remove();
@@ -136,8 +136,10 @@ namespace cpp_data_structures {
     private:
         std::unique_ptr<T> elements[size];
 
+        void move_up();
+
     public:
-        Queue() : AbstractStaticArray() {}
+        Queue() : AbstractStaticArray<T, size>() {}
         virtual ~Queue() {}
 
         T remove();

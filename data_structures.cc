@@ -204,7 +204,7 @@ namespace cpp_data_structures {
     template<class T, unsigned int size>
     T Stack<T, size>::remove() {
         std::pair<T, unsigned int> top_of_stack{this->peek()};
-        elements[top_of_stack.second] = std::unique_ptr<T>{nullptr};
+        this->elements[top_of_stack.second] = std::unique_ptr<T>{nullptr};
 
         return top_of_stack.first;
     }
@@ -219,7 +219,7 @@ namespace cpp_data_structures {
         unsigned int top_of_stack{this->num_filled() - 1};
 
         return std::pair<T, unsigned int>(
-            *elements[top_of_stack],
+            *this->elements[top_of_stack],
             top_of_stack
         );
     }
@@ -236,7 +236,7 @@ namespace cpp_data_structures {
     template<class T, unsigned int size>
     T Queue<T, size>::remove() {
         T removed_element = *elements[0];
-        elements[0] = std::make_unique(nullptr);
+        elements[0] = std::unique_ptr<T>{nullptr};
         this->move_up();
 
         return removed_element;
