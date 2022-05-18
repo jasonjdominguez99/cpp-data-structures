@@ -111,6 +111,29 @@ namespace cpp_data_structures {
 
     };
 
+
+    // Queue class defintion
+    template<typename T, unsigned int size>
+    class Queue
+    {
+    private:
+        std::unique_ptr<T> elements[size];
+
+    public:
+        Queue();
+
+        unsigned int insert(T val);
+        std::pair<T, unsigned int> delete();
+
+        T operator[](int i) const { return elements[i]; }
+
+        template<class U, unsigned int s> friend std::ostream& operator<<(
+            std::ostream& os,
+            const Queue<U, s>& queue
+        );
+
+    };
+
 }
 
 #endif // DATA-STRUCTURES_H_
