@@ -97,9 +97,9 @@ namespace cpp_data_structures {
         AbstractStaticArray();
         virtual ~AbstractStaticArray() {}
 
-        virtual std::pair<bool, unsigned int> add(T val)=0;
         virtual T remove()=0;
 
+        std::pair<bool, unsigned int> add(T val);
         unsigned int num_filled() const;
         bool is_empty() const;
         bool is_full() const;
@@ -122,7 +122,6 @@ namespace cpp_data_structures {
         Stack() : AbstractStaticArray() {}
         virtual ~Stack() {}
 
-        std::pair<bool, unsigned int> add(T val);
         T remove();
 
         std::pair<T, unsigned int> peek() const;
@@ -141,7 +140,6 @@ namespace cpp_data_structures {
         Queue() : AbstractStaticArray() {}
         virtual ~Queue() {}
 
-        std::pair<bool, unsigned int> add(T val);
         T remove();
 
     };

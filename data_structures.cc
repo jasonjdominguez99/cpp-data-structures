@@ -146,6 +146,20 @@ namespace cpp_data_structures {
     }
 
     template<class T, unsigned int size>
+    std::pair<bool, unsigned int> AbstractStaticArray<T, size>::add(T val) {
+        if (this->is_full()) {
+            return std::pair<bool, unsigned int>(false, 0);
+        }
+
+        unsigned int last_element_idx{this->num_filled()};
+        elements[last_element_idx] = std::make_unique<T>(val);
+
+        return std::pair<bool, unsigned int>(
+            true, last_element_idx
+        );
+    }
+
+    template<class T, unsigned int size>
     unsigned int AbstractStaticArray<T, size>::num_filled() const {
         for (int i=0; i < size; i++) {
             if (elements[i] == nullptr) {
@@ -187,20 +201,6 @@ namespace cpp_data_structures {
 
 
     // Stack class method implementations
-    template<class T, unsigned int size>
-    std::pair<bool, unsigned int> Stack<T, size>::add(T val) {
-        if (this->is_full()) {
-            return std::pair<bool, unsigned int>(false, 0);
-        }
-
-        unsigned int top_of_stack{this->num_filled()};
-        elements[top_of_stack] = std::make_unique<T>(val);
-
-        return std::pair<bool, unsigned int>(
-            true, top_of_stack
-        );
-    }
-
     template<class T, unsigned int size>
     T Stack<T, size>::remove() {
         std::pair<T, unsigned int> top_of_stack{this->peek()};
