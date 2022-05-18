@@ -86,6 +86,30 @@ namespace cpp_data_structures {
     };
 
 
+    // AbstractStaticArray class definition
+    template<typename T, unsigned int size>
+    class AbstractStaticArray
+    {
+    protected:
+        std::unique_ptr<T> elements[size];
+
+    public:
+        AbstractStaticArray();
+
+        virtual std::pair<bool, unsigned int> add(T val)=0;
+        virtual T remove()=0;
+
+        bool is_empty() const;
+        bool is_full() const;
+
+        template<class U, unsigned int s>
+        friend std::ostream& operator<<(
+            std::ostream& os,
+            const AbstractStaticArray<U, s>& arr
+        );
+
+    }
+
     // Stack class definition
     template<typename T, unsigned int size>
     class Stack
