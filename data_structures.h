@@ -131,11 +131,9 @@ namespace cpp_data_structures {
 
     // Queue class defintion
     template<typename T, unsigned int size>
-    class Queue
+    class Queue : public AbstractStaticArray<T, size>
     {
     private:
-        std::unique_ptr<T> elements[size];
-
         void move_up();
 
     public:

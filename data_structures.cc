@@ -229,14 +229,14 @@ namespace cpp_data_structures {
     template<class T, unsigned int size>
     void Queue<T, size>::move_up() {
         for (int i=0; i < size - 1; i++) {
-            elements[i] = std::move(elements[i + 1]);
+            this->elements[i] = std::move(this->elements[i + 1]);
         }
     }
 
     template<class T, unsigned int size>
     T Queue<T, size>::remove() {
-        T removed_element = *elements[0];
-        elements[0] = std::unique_ptr<T>{nullptr};
+        T removed_element = *this->elements[0];
+        this->elements[0] = std::unique_ptr<T>{nullptr};
         this->move_up();
 
         return removed_element;

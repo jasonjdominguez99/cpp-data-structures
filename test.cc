@@ -144,7 +144,20 @@ int main() {
 
     //--------Queue class tests--------
 
+    // Testing std::string queue constructor
+    const unsigned int queue_size{3};
+    Queue<std::string, queue_size> strQueue{};
+    std::cout << strQueue << std::endl;
 
+    // Testing adding to the queue
+    strQueue.add("Dave");
+    strQueue.add("Jason");
+    strQueue.add("Billy");
+    std::cout << strQueue << std::endl;
+
+    // Testing removing from the queue
+    strQueue.remove();
+    std::cout << strQueue << std::endl;
 
     //---------------------------------
 
