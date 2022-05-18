@@ -137,16 +137,58 @@ namespace cpp_data_structures {
     }
 
 
-    // Stack class method implementations
+    // AbstractStaticArray class method implementations
     template<class T, unsigned int size>
-    Stack<T, size>::Stack() {
+    AbstractStaticArray<T, size>::AbstractStaticArray() {
         for (int i=0; i < size; i++) {
             elements[i] = std::unique_ptr<T>{nullptr};
         }
     }
 
     template<class T, unsigned int size>
-    bool Stack<T, size>::push(T val) {
+    unsigned int AbstractStaticArray<T, size>::num_filled() const {
+        for (int i=0; i < size; i++) {
+            if (elements[i] == nullptr) {
+                return i;
+            }
+        }
+        return size;
+    }
+
+    template<class T, unsigned int size>
+    bool AbstractStaticArray<T, size>::is_empty() const {
+        return elements[0] == nullptr;
+    }
+
+    template<class T, unsigned int size>
+    bool AbstractStaticArray<T, size>::is_full() const {
+        return elements[size - 1] != nullptr;
+    }
+
+    template<class U, unsigned int s>
+    std::ostream& operator<<(
+        std::ostream& os,
+        const AbstractStaticArray<U, s>& arr) {
+        
+        os << "[ ";
+
+        for (int i=0; i < s; i++) {
+            if (arr.elements[i] != nullptr) {
+                os << *arr.elements[i] << " ";
+            } else {
+                os << "- ";
+            }
+        }
+
+        os << "]";
+
+        return os;
+    }
+
+
+    // Stack class method implementations
+    template<class T, unsigned int size>
+    bool Stack<T, size>::add(T val) {
         if (this->is_full()) { return false; }
 
         unsigned int top_of_stack{this->num_filled()};
@@ -156,7 +198,7 @@ namespace cpp_data_structures {
     }
 
     template<class T, unsigned int size>
-    T Stack<T, size>::pop() {
+    T Stack<T, size>::remove() {
         std::pair<T, unsigned int> top_of_stack{this->peek()};
         elements[top_of_stack.second] = std::unique_ptr<T>{nullptr};
 
@@ -178,43 +220,6 @@ namespace cpp_data_structures {
         );
     }
 
-    template<class T, unsigned int size>
-    unsigned int Stack<T, size>::num_filled() const {
-        for (int i=0; i < size; i++) {
-            if (elements[i] == nullptr) {
-                return i;
-            }
-        }
-        return size;
-    }
-
-    template<class T, unsigned int size>
-    bool Stack<T, size>::is_empty() const {
-        return elements[0] == nullptr;
-    }
-
-    template<class T, unsigned int size>
-    bool Stack<T, size>::is_full() const {
-        return elements[size - 1] != nullptr;
-    }
-
-    template<class U, unsigned int s>
-    std::ostream& operator<<(std::ostream& os, const Stack<U, s>& stack) {
-        os << "[ ";
-
-        for (int i=0; i < s; i++) {
-            if (stack.elements[i] != nullptr) {
-                os << *stack.elements[i] << " ";
-            } else {
-                os << "- ";
-            }
-        }
-
-        os << "]";
-
-        return os;
-    }
-
 
     // Queue class method implementations
     template<class T, unsigned int size>
@@ -222,6 +227,21 @@ namespace cpp_data_structures {
         for (int i=0; i < size; i++) {
             elements[i] = std::unique_ptr<T>{nullptr};
         }
+    }
+
+    template<class T, unsigned int size>
+    unsigned int Queue<T, size>::insert(T val) {
+
+    }
+
+    template<class T, unsigned int size>
+    std::pair<T, unsigned int> Queue<T, size>::delete() {
+
+    }
+
+    template<class U, unsigned int s>
+    std::ostream& operator<<(std::ostream& os, const Queue<U, s>& queue) {
+
     }
 
 }
