@@ -95,10 +95,12 @@ namespace cpp_data_structures {
 
     public:
         AbstractStaticArray();
+        virtual ~AbstractStaticArray() {}
 
         virtual std::pair<bool, unsigned int> add(T val)=0;
         virtual T remove()=0;
 
+        unsigned int num_filled() const;
         bool is_empty() const;
         bool is_full() const;
 
@@ -112,26 +114,16 @@ namespace cpp_data_structures {
 
     // Stack class definition
     template<typename T, unsigned int size>
-    class Stack
+    class Stack : public AbstractStaticArray
     {
-    private:
-        std::unique_ptr<T> elements[size];
-
     public:
-        Stack();
+        Stack() : AbstractStaticArray() {}
+        virtual ~Stack() {}
 
-        bool push(T val);
-        T pop();
+        std::pair<bool, unsigned int> add(T val)=0;
+        T remove();
 
         std::pair<T, unsigned int> peek() const;
-        unsigned int num_filled() const;
-        bool is_empty() const;
-        bool is_full() const;
-
-        template<class U, unsigned int s> friend std::ostream& operator<<(
-            std::ostream& os,
-            const Stack<U, s>& stack
-        );
 
     };
 

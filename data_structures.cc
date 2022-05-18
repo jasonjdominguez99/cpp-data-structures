@@ -188,13 +188,17 @@ namespace cpp_data_structures {
 
     // Stack class method implementations
     template<class T, unsigned int size>
-    bool Stack<T, size>::add(T val) {
-        if (this->is_full()) { return false; }
+    std::pair<bool, unsigned int> Stack<T, size>::add(T val) {
+        if (this->is_full()) {
+            return std::pair<bool, unsigned int>(false, 0);
+        }
 
         unsigned int top_of_stack{this->num_filled()};
         elements[top_of_stack] = std::make_unique<T>(val);
 
-        return true;
+        return std::pair<bool, unsigned int>(
+            true, top_of_stack
+        );
     }
 
     template<class T, unsigned int size>
