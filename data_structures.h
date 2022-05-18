@@ -104,6 +104,8 @@ namespace cpp_data_structures {
         bool is_empty() const;
         bool is_full() const;
 
+        T operator[](int i) const { return elements[i]; }
+
         template<class U, unsigned int s>
         friend std::ostream& operator<<(
             std::ostream& os,
@@ -120,7 +122,7 @@ namespace cpp_data_structures {
         Stack() : AbstractStaticArray() {}
         virtual ~Stack() {}
 
-        std::pair<bool, unsigned int> add(T val)=0;
+        std::pair<bool, unsigned int> add(T val);
         T remove();
 
         std::pair<T, unsigned int> peek() const;
@@ -136,17 +138,11 @@ namespace cpp_data_structures {
         std::unique_ptr<T> elements[size];
 
     public:
-        Queue();
+        Queue() : AbstractStaticArray() {}
+        virtual ~Queue() {}
 
-        unsigned int insert(T val);
-        std::pair<T, unsigned int> delete();
-
-        T operator[](int i) const { return elements[i]; }
-
-        template<class U, unsigned int s> friend std::ostream& operator<<(
-            std::ostream& os,
-            const Queue<U, s>& queue
-        );
+        std::pair<bool, unsigned int> add(T val);
+        T remove();
 
     };
 
